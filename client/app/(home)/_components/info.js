@@ -1,21 +1,17 @@
 "use client";
+// import { useQuery } from "react-query";
 
-import { useEffect } from "react";
-import { useQuery } from "react-query";
-
-import { fetchTodos } from "../../../actions/messages";
-
+// import { fetchTodos } from "../../../actions/messages";
+import FriendSearcher from "../_components/chat/FriendSearcher";
 function InfoPage() {
   // eslint-disable-next-line prettier/prettier
-  const {  refetch } = useQuery("todos", fetchTodos);
+  // const { refetch } = useQuery("todos", fetchTodos);
 
-
-
-  useEffect(() => {
-    refetch(); // Optionally, fetch data on component mount
-  }, []);
-
-  return <div className="">InfoPage</div>;
+  return (
+    <div className=" ">
+      <FriendSearcher />
+    </div>
+  );
 }
 
 export default InfoPage;
