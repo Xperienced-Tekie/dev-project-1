@@ -1,4 +1,7 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth2').Strategy;
+const expressSession = require('cookie-session');
 
 const saltRounds = 10;
 
@@ -24,5 +27,39 @@ async function comparePassword(password, hash) {
     return (`Internal server error from comparing password: ${error}`);
   }
 }
+
+passport.use(new GoogleStrategy({
+  clientID:'101321294716-db3abp2c770u1spr31relho5l8gqqv9i.apps.googleusercontent.com',
+  clientSecret: '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',
+  callbackURL: '/auth/google/callback',
+  passReqToCallback: true
+
+}, 
+async (req, accessToken, refreshToken, profile, done) => {
+  try {
+    const existingUser = await prisma.User.findUnique({
+      where: { email: profile.emails[0].value }
+    });
+    if (existingUser) {
+      console.log('User already exists')
+      return done(null, existingUser);
+    } else {
+      const newUser = await prisma.User.create( {
+        data: {
+          firstname: profile.name.givenName,
+          email: profile.emails[0].value,
+          password: profile.password
+        }
+      });
+      return done(null, newUser)
+
+    }
+  } catch (error) {
+    console.error('Error creating user:', error);
+    return done(error);
+  }
+}
+
+));
 
 module.exports = { hashPassword, comparePassword };

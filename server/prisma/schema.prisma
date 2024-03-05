@@ -13,19 +13,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// prisma/schema.prisma
-
 model User {
   id         Int       @id @default(autoincrement())
-  firstname  String
-  lastname   String
-  username   String    @unique
+  username   String?   @unique
   email      String    @unique
   password   String
+  bio        String?
+  profilePicUrl String?
   sentMessages Message[] @relation("Sender")
   receivedMessages Message[] @relation("Recipient")
 }
-
 model Message {
   id              Int      @id @default(autoincrement())
   sender          User     @relation("Sender", fields: [senderId], references: [id])
@@ -34,4 +31,3 @@ model Message {
   recipientId     Int
   content         String
 }
-
