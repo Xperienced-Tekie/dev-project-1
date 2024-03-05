@@ -1,22 +1,24 @@
-const Input = (props) => {
+function Input(props) {
+  const { inputtype, label, ...inputProps } = props;
+  const { id } = inputProps;
   let inputElement = null;
-  switch (props.inputtype) {
+  switch (inputtype) {
     case "input":
-      inputElement = <input {...props} />;
+      inputElement = <input id={id} {...inputProps} />;
       break;
     case "textarea":
-      inputElement = <textarea {...props} />;
+      inputElement = <textarea id={id} {...inputProps} />;
       break;
     default:
-      inputElement = <input {...props} />;
+      inputElement = <input id={id} {...inputProps} />;
   }
 
   return (
     <div>
-      <label>{props.label}</label>
+      <label htmlFor={id}>{label}</label>
       {inputElement}
     </div>
   );
-};
+}
 
 export default Input;

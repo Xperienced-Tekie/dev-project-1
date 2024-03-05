@@ -1,10 +1,13 @@
-const Avater = (props) => {
+import { Image } from "lucide-react";
+
+function Avater(props) {
+  const { alt, avaterName, figureClassName, ...inputProps } = props;
   return (
-    <figure className={props.figureClassName}>
-      <img {...props} />
-      <p>{props.avaterName}</p>
+    <figure className={figureClassName}>
+      <Image alt={alt} {...inputProps} />
+      <p>{avaterName}</p>
     </figure>
   );
-};
+}
 
 export default Avater;
