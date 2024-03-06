@@ -33,6 +33,7 @@ async function comparePassword(password, hash) {
   }
 }
 
+// Passport Config
 passport.use(new GoogleStrategy({
   clientID:'101321294716-db3abp2c770u1spr31relho5l8gqqv9i.apps.googleusercontent.com',
   clientSecret: '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',
@@ -51,9 +52,9 @@ async (req, accessToken, refreshToken, profile, done) => {
     } else {
       const newUser = await prisma.User.create( {
         data: {
-          firstname: profile.name.givenName,
+          username: profile.name.givenName,
           email: profile.emails[0].value,
-          password: profile.password
+          password: null
         }
       });
       return done(null, newUser)
@@ -66,6 +67,8 @@ async (req, accessToken, refreshToken, profile, done) => {
 }
 
 ));
+
+// Passport Serializer
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
