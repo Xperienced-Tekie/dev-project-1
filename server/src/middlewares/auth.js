@@ -60,4 +60,4 @@ async (req, accessToken, refreshToken, profile, done) => {
 
 ));
 
-module.exports = { hashPassword, comparePassword };
+module.exports = { hashPassword, comparePassword, passport };

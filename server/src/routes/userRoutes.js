@@ -1,16 +1,27 @@
 const express = require('express');
 const {
-  registerUser,
-  loginUser,
-  getUsers,
-  onBoarding,
-  updateSettings,
-} = require('../controllers/usersController');
+    registerUser,
+    loginUser,
+    getUsers,
+    onBoarding,
+    updateSettings,
+  } = require('../controllers/usersController');
+
 const { uploadProfilePic } = require('../middlewares/fileUpload');
+const session = require('express-session');
 
 const app = express();
+const passport = require('passport');
+
+app.use(session({
+    secret: 'chattie',
+    resave: false,
+    saveUninitialized: false
+  }));
 
 app.use(express.json());
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Annotate your API route files with Swagger annotations to describe the endpoints
 /**
@@ -26,6 +37,12 @@ app.use(express.json());
  *           schema:
  *             type: object
  *             properties:
+ *               firstname:
+ *                 type: string
+ *               lastname:
+ *                 type: string
+ *               username:
+ *                 type: string
  *               email:
  *                 type: string
  *               password:
@@ -38,7 +55,7 @@ app.use(express.json());
  */
 app.post('/register', registerUser);
 
-// Annotate logging in a user
+// Annotate getting the list of users
 /**
  * @swagger
  * /login:
@@ -64,7 +81,7 @@ app.post('/register', registerUser);
  */
 app.post('/login', loginUser);
 
-// Annotate getting the list of users based on the username
+// Annotate getting the list of users
 /**
  * @swagger
  * /users:
@@ -75,7 +92,7 @@ app.post('/login', loginUser);
  *       200:
  *         description: Users retrieved successfully
  *       400:
- *         description: Error retrieving users
+ *         description: Error getting users
  */
 app.get('/users', getUsers);
 
@@ -109,7 +126,7 @@ app.get('/users', getUsers);
  *       400:
  *         description: Error updating user details
  */
-app.put('/settings', updateSettings);
+// app.put('/settings', updateSettings);
 
 // Annotate Onboarding route with profile picture upload
 /**
@@ -143,5 +160,14 @@ app.put('/settings', updateSettings);
  *         description: Error onboarding user
  */
 app.post('/onboarding', uploadProfilePic, onBoarding);
+
+app.get('/users', getUsers);
+
+app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email']}));
+
+app.get('/auth/google/callback', passport.authenticate('google', {
+    successRedirect: '/',
+    failureRedirect: '/login',
+}))
 
 module.exports = app;
