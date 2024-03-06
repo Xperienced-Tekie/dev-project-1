@@ -3,6 +3,13 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
 const expressSession = require('cookie-session');
 
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient({
+  log: ['error'],
+});
+
+
+
 const saltRounds = 10;
 
 // Hash a password
@@ -59,5 +66,18 @@ async (req, accessToken, refreshToken, profile, done) => {
 }
 
 ));
+
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser(async (id, done) => {
+  try {
+      const user = await prisma.User.findUnique({ where: { id } });
+      done(null, user);
+  } catch (error) {
+      done(error);
+  }
+});
 
 module.exports = { hashPassword, comparePassword, passport };
