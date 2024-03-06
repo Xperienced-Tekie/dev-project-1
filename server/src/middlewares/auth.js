@@ -29,36 +29,35 @@ async function comparePassword(password, hash) {
 }
 
 // Passport Config
-passport.use(new GoogleStrategy({
-  clientID:'101321294716-db3abp2c770u1spr31relho5l8gqqv9i.apps.googleusercontent.com',
-  clientSecret: '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',
-  callbackURL: '/auth/google/callback',
-  passReqToCallback: true
-}, 
-async (req, accessToken, refreshToken, profile, done) => {
-  try {
-    const existingUser = await prisma.User.findUnique({
-      where: { email: profile.emails[0].value }
-    });
-    if (existingUser) {
-      console.log('User already exists')
-      return done(null, existingUser);
-    } else {
-      const newUser = await prisma.User.create( {
+passport.use(new GoogleStrategy(
+  {
+    clientID: '101321294716-db3abp2c770u1spr31relho5l8gqqv9i.apps.googleusercontent.com',
+    clientSecret: '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',
+    callbackURL: '/auth/google/callback',
+    passReqToCallback: true,
+  },
+  async (req, accessToken, refreshToken, profile, done) => {
+    try {
+      const existingUser = await prisma.User.findUnique({
+        where: { email: profile.emails[0].value },
+      });
+      if (existingUser) {
+        console.log('User already exists');
+        return done(null, existingUser);
+      }
+      const newUser = await prisma.User.create({
         data: {
           username: profile.name.givenName,
           email: profile.emails[0].value,
-          password: "",
-        }
+          password: '',
+        },
       });
       return done(null, newUser);
-
+    } catch (error) {
+      console.error('Error creating user:', error);
+      return done(error);
     }
-  } catch (error) {
-    console.error('Error creating user:', error);
-    return done(error);
-  }
-}
+  },
 
 ));
 
@@ -70,10 +69,10 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-      const user = await prisma.User.findUnique({ where: { id } });
-      done(null, user);
+    const user = await prisma.User.findUnique({ where: { id } });
+    done(null, user);
   } catch (error) {
-      done(error);
+    done(error);
   }
 });
 
