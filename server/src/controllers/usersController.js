@@ -49,7 +49,7 @@ const loginUser = async (req, res) => {
 // Get all users
 const getUser = async (req, res) => {
   try {
-    const users = await prisma.user.findMany();
+    const users = await prisma.User.findMany();
     res.status(200).json(users);
   } catch (error) {
     res.status(400).json({ Error: error.message });
