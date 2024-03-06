@@ -1,17 +1,13 @@
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
-const expressSession = require('cookie-session');
-
 const { PrismaClient } = require('@prisma/client');
+
 const prisma = new PrismaClient({
   log: ['error'],
 });
 
-
-
 const saltRounds = 10;
-
 // Hash a password
 async function hashPassword(password) {
   try {
@@ -21,7 +17,6 @@ async function hashPassword(password) {
     return `Internal server error from hashing password: ${error}`;
   }
 }
-
 // Compare a password with a hash
 async function comparePassword(password, hash) {
   try {
@@ -39,7 +34,6 @@ passport.use(new GoogleStrategy({
   clientSecret: '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',
   callbackURL: '/auth/google/callback',
   passReqToCallback: true
-
 }, 
 async (req, accessToken, refreshToken, profile, done) => {
   try {
@@ -54,10 +48,10 @@ async (req, accessToken, refreshToken, profile, done) => {
         data: {
           username: profile.name.givenName,
           email: profile.emails[0].value,
-          password: ""
+          password: "",
         }
       });
-      return done(null, newUser)
+      return done(null, newUser);
 
     }
   } catch (error) {

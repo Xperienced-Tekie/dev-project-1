@@ -95,7 +95,6 @@ const loginUser = async (req, res) => {
 // Update user details for the settings page
 const updateSettings = async (req, res) => {
   try {
-
     const users = await prisma.User.findMany();
     res.status(200).json(users);
 
@@ -115,7 +114,6 @@ const updateSettings = async (req, res) => {
       },
     });
     return res.status(200).json(updateUser);
-
   } catch (error) {
     return res.status(400).json({ Error: error.message });
   }
