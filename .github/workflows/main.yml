@@ -1,0 +1,49 @@
+name: Node.js and Next.js CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+    - uses: actions/checkout@v3
+
+    # Setup Node.js environment
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'yarn' # Change cache from 'npm' to 'yarn'
+
+    # Install dependencies for the backend
+    - name: Install backend dependencies
+      working-directory: ./server
+      run: yarn install --frozen-lockfile # Use yarn instead of npm ci
+
+    # Run lints for the backend
+    - name: Lint backend
+      working-directory: ./server
+      run: yarn lint # Use yarn to run lints
+    # Run lints for the backend
+    - name: Lint Frontend
+      working-directory: ./client
+      run: yarn lint # Use yarn to run lint
+
+    # Install dependencies for the frontend
+    - name: Install frontend dependencies
+      working-directory: ./client
+      run: yarn install --frozen-lockfile # Use yarn to install dependencies
+
+    # Build the frontend
+    - name: Build frontend
+      working-directory: ./client
+      run: yarn build # Use yarn to build the project
