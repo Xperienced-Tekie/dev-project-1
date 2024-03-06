@@ -54,7 +54,7 @@ async (req, accessToken, refreshToken, profile, done) => {
         data: {
           username: profile.name.givenName,
           email: profile.emails[0].value,
-          password: null
+          password: ""
         }
       });
       return done(null, newUser)
