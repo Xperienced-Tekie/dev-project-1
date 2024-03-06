@@ -8,20 +8,23 @@ const prisma = new PrismaClient({
 });
 
 const saltRounds = 10;
+
 // Hash a password
 async function hashPassword(password) {
   try {
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     return hashedPassword;
   } catch (error) {
-    return `Internal server error from hashing password: ${error}`;
+    console.error('Error hashing password:', error);
+    throw new Error(`Internal server error from hashing password: ${error}`);
   }
 }
+
 // Compare a password with a hash
 async function comparePassword(password, hash) {
   try {
-    const hashedPassword = await bcrypt.compare(password, hash);
-    return hashedPassword;
+    const match = await bcrypt.compare(password, hash);
+    return match;
   } catch (error) {
     console.error('Error comparing passwords:', error);
     throw new Error(`Internal server error from comparing passwords: ${error}`);
@@ -58,18 +61,16 @@ passport.use(new GoogleStrategy(
       return done(error);
     }
   },
-
 ));
 
 // Passport Serializer
-
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await prisma.User.findUnique({ where: { id } });
+    const user = await prisma.user.findUnique({ where: { id } });
     done(null, user);
   } catch (error) {
     done(error);

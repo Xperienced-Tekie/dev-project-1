@@ -1,10 +1,7 @@
 const { PrismaClient } = require('@prisma/client');
 const multer = require('multer');
 const { hashPassword, comparePassword } = require('../middlewares/auth');
-const {
-  validateUser,
-  validateLogin,
-} = require('../validations/usersValidations');
+const { validateUser, validateLogin } = require('../validations/usersValidations');
 const { uploadProfilePic } = require('../middlewares/fileUpload');
 
 const prisma = new PrismaClient({
@@ -18,6 +15,7 @@ const registerUser = async (req, res) => {
     if (error) {
       return res.status(400).json({ error: error.details[0].message });
     }
+
     // Hash the password
     const hashedPassword = await hashPassword(req.body.password);
 
@@ -43,7 +41,6 @@ const onBoarding = async (req, res) => {
       if (err instanceof multer.MulterError) {
         return res.status(500).json({ error: 'File upload error' });
       }
-      // return res.status(500).json({ error: 'Internal server error' });
 
       // Update user profile with uploaded profile picture URL
       const updatedUser = await prisma.User.update({
@@ -95,9 +92,6 @@ const loginUser = async (req, res) => {
 // Update user details for the settings page
 const updateSettings = async (req, res) => {
   try {
-    const users = await prisma.User.findMany();
-    res.status(200).json(users);
-
     // Hash the password
     const hashedPassword = await hashPassword(req.body.password);
 
