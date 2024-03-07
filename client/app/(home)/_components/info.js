@@ -10,7 +10,6 @@ function InfoPage() {
   const {  refetch } = useQuery("todos", fetchTodos);
 
 
-
   useEffect(() => {
     refetch(); // Optionally, fetch data on component mount
   }, []);

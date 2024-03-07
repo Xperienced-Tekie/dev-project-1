@@ -10,6 +10,7 @@
     "lint:fix": "next lint --fix"
   },
   "dependencies": {
+    "@babel/eslint-parser": "^7.23.10",
     "@heroicons/react": "^2.1.1",
     "@radix-ui/react-slot": "^1.0.2",
     "class-variance-authority": "^0.7.0",
@@ -23,10 +24,12 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@babel/core": "^7.24.0",
+    "@babel/eslint-parser": "^7.23.10",
     "@types/node": "20.11.24",
     "@types/react": "18.2.63",
     "autoprefixer": "^10.0.1",
-    "eslint": "^7.32.0 || ^8.2.0",
+    "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-next": "14.1.0",
     "eslint-config-prettier": "^9.1.0",
@@ -38,6 +41,6 @@
     "postcss": "^8",
     "prettier": "^3.2.5",
     "tailwindcss": "^3.3.0",
-    "typescript": "5.3.3"
+    "typescript": "5.4.2"
   }
 }
