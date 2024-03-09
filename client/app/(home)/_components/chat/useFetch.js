@@ -1,15 +1,36 @@
 import { useEffect, useState } from "react";
 
-const UseFetch = () => {
+export const useFetch = () => {
   const [check, setCheck] = useState([]);
+  const [loading, setLoading] = useState(true); // Set loading state to true initially
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:8000/data") // to run the server npx json-server --watch data/db.json --port 8000
-      .then((res) => res.json())
-      .then((fetchedData) => setCheck(fetchedData));
+    const fetchData = async () => {
+      try {
+        const res = await fetch("http://localhost:8000/data");
+        if (!res.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        const data = await res.json();
+        setCheck(data);
+        setLoading(false); // Set loading state to false after data is fetched
+      } catch (error) {
+        setError(error);
+        setLoading(false); // Set loading state to false on error
+      }
+    };
+
+    fetchData(); // Call fetchData function to trigger data fetching
   }, []);
 
-  return { check };
+  return { check, loading, error }; // Return check, loading, and error states
 };
 
-export default UseFetch;
+// export const getStaticProps = async () => {
+//   const res = await fetch("https://jsonplaceholder.typicode.com/users");
+//   const data = await res.json()
+//   return{
+//     props:{ data}
+//   }
+// };
