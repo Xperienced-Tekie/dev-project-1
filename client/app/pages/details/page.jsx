@@ -1,11 +1,9 @@
+"use client";
+
 import Details from "./Details";
 
 function About() {
-  return (
-    <>
-      <Details />
-    </>
-  );
+  return <Details />;
 }
 
 export default About;

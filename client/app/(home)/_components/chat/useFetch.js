@@ -1,36 +1,21 @@
 import { useEffect, useState } from "react";
 
-export const useFetch = () => {
+const useFetch = () => {
   const [check, setCheck] = useState([]);
-  const [loading, setLoading] = useState(true); // Set loading state to true initially
-  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch("http://localhost:8000/data");
-        if (!res.ok) {
-          throw new Error("Failed to fetch data");
+    fetch("http://localhost:8000/data")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
         }
-        const data = await res.json();
-        setCheck(data);
-        setLoading(false); // Set loading state to false after data is fetched
-      } catch (error) {
-        setError(error);
-        setLoading(false); // Set loading state to false on error
-      }
-    };
-
-    fetchData(); // Call fetchData function to trigger data fetching
+        return response.json();
+      })
+      .then((data) => setCheck(data))
+      .catch((error) => error);
   }, []);
-
-  return { check, loading, error }; // Return check, loading, and error states
+  // Return check state
+  return { check };
 };
 
-// export const getStaticProps = async () => {
-//   const res = await fetch("https://jsonplaceholder.typicode.com/users");
-//   const data = await res.json()
-//   return{
-//     props:{ data}
-//   }
-// };
+export default useFetch;

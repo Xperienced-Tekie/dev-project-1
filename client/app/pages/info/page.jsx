@@ -1,37 +1,13 @@
-import Profile from "./[ID]";
+"use client";
 
-export const getStaticPaths = async () => {
-  const res = await fetch("http://localhost:8000/data");
-  const data = await res.json();
-  const paths = data.map((path) => {
-    return {
-      params: { id: path.id.toString() },
-    };
-  });
-  return {
-    paths,
-    // fallback: false,
-  };
-};
+import Person from "./Person";
 
-export const fetchData = async (context) => {
-  const id = context.params.id;
-  const res = await fetch("http://localhost:8000/data/" + id); 
-  const data = await res.json(); 
-  return {
-    props: { user: data },
-  };
-};
-
-const Info = ({ user }) => {
+function page() {
   return (
-    <>
-      <Profile />
-      <div>{user.name}</div>
-      <div>{user.category}</div>
-      <div>{user.id}</div>
-    </>
+    <div>
+      <Person />
+    </div>
   );
-};
+}
 
-export default Info;
+export default page;
