@@ -4,15 +4,34 @@ import userImage from "../../../public/rectangle.png";
 
 function Person() {
   return (
-    <div>
-      <section>
-        <header>
-          <Image src={userImage} height="40" width="40" alt="imageName" />
-          <h4>Warmarth Fradday</h4>
+    <div className=" bg-neutral-800">
+      {/* container section */}
+      <section className="max-w-[24rem] min-h-[100vh]  bg-slate-800 space-y-[2rem] px-[1rem] text-slate-200 m-auto">
+        <Link href="/">
+          <button
+            className=" m-2 border bg-violet-800 font-bold hover:bg-violet-600 transition"
+            type="button"
+          >
+            {" "}
+            a-icon
+          </button>
+        </Link>
+        {/* header for image and image name */}
+        <header className="space-y-[1.5rem]  p-1 ">
+          <Image
+            src={userImage}
+            height="80"
+            width="80"
+            s
+            alt="imageName"
+            className="m-auto"
+          />
+          <h4 className="capitalize text-center font-bold">Warmarth Fradday</h4>
         </header>
-        <article>
-          <h5>show information</h5>
-          <p>
+        {/* user information and bio */}
+        <article className="px-2 space-y-[1rem]">
+          <h5 className="font-bold capitalize">short bio</h5>
+          <p className="tracking-widest text-sm">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio,
             ipsum porro. Sequi, sit. Voluptates accusantium tenetur perspiciatis
             voluptatibus error nulla odio aperiam, numquam mollitia esse, totam
@@ -20,11 +39,6 @@ function Person() {
           </p>
         </article>
       </section>
-      <Link href="/">
-        <p className="p-2 border m-1 bg-violet-800 rounded-b-xl font-bold hover:bg-violet-600 transition">
-          home
-        </p>
-      </Link>
     </div>
   );
 }
