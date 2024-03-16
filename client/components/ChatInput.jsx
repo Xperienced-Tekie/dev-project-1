@@ -4,9 +4,10 @@ import React, { useState } from "react";
 import { BsEmojiSmileFill } from "react-icons/bs";
 import { IoMdAdd, IoMdSend } from "react-icons/io";
 import Picker from "emoji-picker-react";
+// import { messages } from "../lib/mesages";
 
 export default function ChatInput({ handleSendMsg }) {
-  const [msg, setMsg] = useState("");
+  const [msg, setMsg] = useState([]);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
   const handleEmojiPickerhideShow = () => {
@@ -14,27 +15,26 @@ export default function ChatInput({ handleSendMsg }) {
   };
 
   const handleEmojiClick = (event) => {
-    let message = msg;
-    const sym = event.unified.split("-");
-    const codesArray = [];
-    sym.forEach((el) => codesArray.push(`0x${el}`));
-    const emoji = String.fromCodePoint(...codesArray);
-    message += emoji;
-    setMsg(message);
+    event.preventDefault();
+    // let message = msg;
+    // const sym = event.unified.split("-");
+    // const codesArray = [];
+    // sym.forEach((el) => codesArray.push(`0x${el}`));
+    // const emoji = String.fromCodePoint(...codesArray);
+    // message += emoji;
+    // setMsg(message);
   };
 
   const sendChat = (event) => {
     event.preventDefault();
-    if (msg.length > 0) {
-      handleSendMsg(msg);
-      setMsg("");
-    }
+    handleSendMsg(msg);
+    setMsg("");
   };
 
   return (
     <form
-      className="flex items-center  justify-center rounded-full py-2 max-w-[500px] mx-auto"
-      onSubmit={(event) => sendChat(event)}
+      className="flex items-center  justify-center rounded-full py-2"
+      onSubmit={sendChat}
     >
       <div className="bg-blue-700 p-3 rounded-full mr-2">
         <IoMdAdd className="text-gray-400 text-4xl cursor-pointer" />
