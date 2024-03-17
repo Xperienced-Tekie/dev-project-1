@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import userImage from "../../../public/rectangle.png";
+import userImage from "../../../public/StatusYes.png";
 
 function Person() {
   return (
     <div className=" bg-neutral-800">
       {/* container section */}
-      <section className="max-w-[24rem] min-h-[100vh]  bg-slate-800 space-y-[2rem] px-[1rem] text-slate-200 m-auto">
+      <section className="max-w-[24rem] min-h-[90vh]  bg-slate-800 space-y-[2rem] px-[1rem] text-slate-200 ">
         <Link href="/">
           <button
             className=" m-2 border bg-violet-800 font-bold hover:bg-violet-600 transition"
@@ -20,9 +20,8 @@ function Person() {
         <header className="space-y-[1.5rem]  p-1 ">
           <Image
             src={userImage}
-            height="80"
-            width="80"
-            s
+            height="140"
+            width="151"
             alt="imageName"
             className="m-auto"
           />
