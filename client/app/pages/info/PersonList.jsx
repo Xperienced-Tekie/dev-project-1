@@ -1,11 +1,11 @@
-import Input from "@/app/(home)/_components/reuseables/Input";
 import React, { useState } from "react";
-import { display } from "@/app/(home)/_components/reuseables/Avatar";
-import useFetch from "@/app/(home)/_components/chat/useFetch";
-import searchIcon from "../../../public/icon-search.svg";
+import Input from "../../(home)/_components/reuseables/Input";
+import { display } from "../../(home)/_components/reuseables/Avatar";
+import useFetch from "../../(home)/_components/chat/useFetch";
 
-
-const PersonList = ({ handleClick, children }) => {
+//  <div role="button" onKeyDown={handleKeyDown} tabIndex={0}>
+// the addition of the above line is to make the div tag focusable
+function PersonList({ handleClick, handleKeyDown }) {
   const [qry, setQry] = useState("");
   const handleInput = (event) => {
     setQry(event.target.value);
@@ -20,10 +20,7 @@ const PersonList = ({ handleClick, children }) => {
         <Input
           inputtype="input"
           placeholder="search"
-          className={
-            "w-[20rem] h-[4rem] py-2 pl-3 mt-12 text-sm border-0 outline-none rounded-lg"
-          }
-          style={{ backGroundImage: { searchIcon } }}
+          className="w-[20rem] h-[4rem] py-2 pl-3 mt-12 text-sm border-0 outline-none rounded-lg"
           value={qry}
           onChange={handleInput}
         />
@@ -33,6 +30,9 @@ const PersonList = ({ handleClick, children }) => {
           key={item.id}
           className="my-3 py-2 px-2 text-xl bg-slate-200 flex items-center justify-between w-[20rem] rounded-md hover:border-l-4 hover:border-l-blue-800 transition-all"
           onClick={handleClick}
+          role="button"
+          onKeyDown={handleKeyDown}
+          tabIndex={0}
         >
           <p>{item.name}</p>
           <div>
@@ -43,6 +43,6 @@ const PersonList = ({ handleClick, children }) => {
       ))}
     </section>
   );
-};
+}
 
 export default PersonList;
