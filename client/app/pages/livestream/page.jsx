@@ -2,10 +2,8 @@
 
 import Stream from "./Stream";
 
-const page = () => (
-  <div>
-    <Stream />
-  </div>
-);
+function About() {
+  return <Stream />;
+}
 
-export default page;
+export default About;

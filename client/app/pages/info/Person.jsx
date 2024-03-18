@@ -4,7 +4,7 @@ import userImage from "../../../public/StatusYes.png";
 
 function Person() {
   return (
-    <div className=" bg-neutral-800">
+    <div className=" ">
       {/* container section */}
       <section className="max-w-[24rem] min-h-[90vh]  bg-slate-800 space-y-[2rem] px-[1rem] text-slate-200 ">
         <Link href="/">

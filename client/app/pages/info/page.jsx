@@ -17,10 +17,10 @@ function page() {
 
   return (
     <div
-      className={`transition-all flex flex-row bg-neutral-600 justify-center ${swift ? "" : "none"}`}
+      className={`transition-all flex flex-row h-full bg-neutral-600 justify-center ${swift ? "" : "none"}`}
     >
       <PersonList
-        handleClick={clickHandler}
+        handleClick={() => clickHandler}
         handleKeyDown={() => handleKeyDown}
       />
       {swift && <Person />}
