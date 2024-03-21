@@ -1,17 +1,19 @@
 "use client";
 
 import ChatInput from "./ChatInput";
-import ChatBox from "./ChatBox";
+import ChatBody from "./ChatBody";
 import messages from "../lib/mesages";
+import ChatHeader from "./ChatHeader";
 
 export default function ChatContainer() {
-  const handleSendMsg = async (e) => {
-    console.log("message:", e.value);
+  const handleSendMsg = async () => {
+    //
   };
 
   return (
-    <div className="max-w-[500px] mx-auto p-6 bg-gray-800 rounded-lg h-[100vh]">
-      <ChatBox messages={messages} />
+    <div className="md:max-w-[500px] sm:w-full mx-auto p-6 bg-gray-800 rounded-lg h-screen flex flex-col justify-between">
+      <ChatHeader />
+      <ChatBody messages={messages} />
       <ChatInput handleSendMsg={handleSendMsg} />
     </div>
   );

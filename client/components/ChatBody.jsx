@@ -1,20 +1,21 @@
 "use client";
 
-// import React, { useState, useEffect, useRef } from "react";
-import CurrectUserInfo from "./CurrectUserInfo";
+import React, { useEffect, useRef } from "react";
 
-function ChatBox({ messages }) {
+function ChatBody({ messages }) {
+  const dummy = useRef(null);
+
+  useEffect(() => {
+    dummy.current.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   return (
-    <div className="flex flex-col gap-4 h-[28rem] shadonw-sm w-full overflow-y-scroll relative">
-      {/* Top Fixed Current User Info here. It should recieve the props for the current user */}
-      <CurrectUserInfo />
-
+    <div className="flex flex-col gap-4 h-[75%] shadonw-sm w-full overflow-y-scroll relative justify-between">
       {messages ? (
         messages.map((message) => (
           <div
             key={message.id}
-            className={`flex items-center mt-4 ${
+            className={`flex items-center mt-2 ${
               message.id === "user" ? "justify-end " : "justify-start"
             }`}
           >
@@ -25,6 +26,7 @@ function ChatBox({ messages }) {
             >
               <p>{message.text}</p>
               <span className="text-[10px] ml-auto">3PM</span>
+              <div ref={dummy} />
             </div>
           </div>
         ))
@@ -37,4 +39,4 @@ function ChatBox({ messages }) {
   );
 }
 
-export default ChatBox;
+export default ChatBody;
