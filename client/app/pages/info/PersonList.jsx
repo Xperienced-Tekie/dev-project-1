@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import Input from "../../(home)/_components/reuseables/Input";
-import { display } from "../../(home)/_components/reuseables/Avatar";
-import useFetch from "../../(home)/_components/chat/useFetch";
+import Image from "next/image";
+import Input from "../../../components/reuseables/Input";
+import { display } from "../../../components/reuseables/Avatar";
+import useFetch from "../../../components/reuseables/useFetch";
 
 //  <div role="button" onKeyDown={handleKeyDown} tabIndex={0}>
 // the addition of the above line is to make the div tag focusable

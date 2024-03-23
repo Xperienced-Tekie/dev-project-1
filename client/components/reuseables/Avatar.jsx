@@ -12,12 +12,15 @@ export const display = (obj, user) =>
       item.name.toLowerCase().includes(user.toLowerCase()) ||
       item.category.toLowerCase().includes(user.toLowerCase()),
   );
+export const deleteItem = (obj) => obj.filter((item) => item.id !== item.id);
 
-function Avater(props) {
-  const { alt, avaterName, figureClassName, ...inputProps } = props;
+export const TextContainer = ({ className, text }) => (
+  <p className={className}>{text}</p>
+);
+function Avater({ alt, src, avaterName, figureClassName, ...inputProps }) {
   return (
     <figure className={figureClassName}>
-      <Image alt={alt} {...inputProps} />
+      <Image alt={alt} src={src} {...inputProps} />
       <p>{avaterName}</p>
     </figure>
   );

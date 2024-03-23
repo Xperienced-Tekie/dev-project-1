@@ -1,9 +1,8 @@
 "use client";
-
 import Stream from "./Stream";
 
-function About() {
+function page() {
   return <Stream />;
 }
 
-export default About;
+export default page;
