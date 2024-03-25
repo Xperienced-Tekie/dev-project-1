@@ -4,8 +4,8 @@ import { useState } from "react";
 import { TextContainer } from "../../../../components/reuseables/Avatar";
 import Input from "../../../../components/reuseables/Input";
 
-const API_KEY = "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";
-const API_URL = "https://api.openai.com/v1/chat/completions";
+//const API_KEY = //"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";
+//const API_URL = //"https://api.openai.com/v1/chat/completions";
 
 function ChatAiInput() {
   const [input, setInput] = useState("");
