@@ -1,4 +1,5 @@
 "use client";
+
 import Stream from "./Stream";
 
 function page() {

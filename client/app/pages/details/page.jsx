@@ -1,4 +1,5 @@
 "use client";
+
 import ChatAi from "./AiChater";
 import Details from "./Details";
 

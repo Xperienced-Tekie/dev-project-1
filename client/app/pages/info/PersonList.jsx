@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Image from "next/image";
 import Input from "../../../components/reuseables/Input";
 import { display } from "../../../components/reuseables/Avatar";
 import useFetch from "../../../components/reuseables/useFetch";

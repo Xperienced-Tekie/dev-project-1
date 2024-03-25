@@ -12,11 +12,13 @@ export const display = (obj, user) =>
       item.name.toLowerCase().includes(user.toLowerCase()) ||
       item.category.toLowerCase().includes(user.toLowerCase()),
   );
-export const deleteItem = (obj) => obj.filter((item) => item.id !== item.id);
 
-export const TextContainer = ({ className, text }) => (
-  <p className={className}>{text}</p>
-);
+export const deleteItem = (obj, deleteObj) =>
+  obj.filter((item) => item.id !== deleteObj.id);
+
+export function TextContainer({ className, text }) {
+  return <p className={className}>{text}</p>;
+}
 function Avater({ alt, src, avaterName, figureClassName, ...inputProps }) {
   return (
     <figure className={figureClassName}>
