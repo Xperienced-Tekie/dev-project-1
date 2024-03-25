@@ -9,8 +9,6 @@ function InfoPage() {
   // eslint-disable-next-line prettier/prettier
   const {  refetch } = useQuery("todos", fetchTodos);
 
-
-
   useEffect(() => {
     refetch(); // Optionally, fetch data on component mount
   }, []);
