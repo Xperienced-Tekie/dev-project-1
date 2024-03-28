@@ -3,7 +3,11 @@
 import Stream from "./Stream";
 
 function page() {
-  return <Stream />;
+  return (
+    <div>
+      <Stream />
+    </div>
+  );
 }
 
 export default page;

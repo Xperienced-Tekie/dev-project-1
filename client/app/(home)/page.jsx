@@ -25,7 +25,7 @@ function FriendSearcher() {
       />
       <div className=" text-red-900 w-[20rem]">
         {filtred.map((item) => (
-          <Link href={`/pages/test/${item.id}`} key={item.id}>
+          <Link href={`/pages/route/${item.id}`} key={item.id}>
             <Avater
               figureClassName="m-2 rounded-md bg-blue-100 list-style-none flex flex gap-[0.5rem] items-center"
               src={item.id}

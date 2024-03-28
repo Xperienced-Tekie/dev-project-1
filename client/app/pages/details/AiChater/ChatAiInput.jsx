@@ -7,7 +7,7 @@ import ChatAi from "./ChatAi";
 const API_KEY = "";
 const API_URL = "https://api.openai.com/v1/chat/completions";
 
-function ChatAiInput() {
+function ChatAiInput({ className }) {
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [chat, setChat] = useState([
@@ -66,9 +66,9 @@ function ChatAiInput() {
   };
 
   return (
-    <div className="scroll-m-4">
+    <div className={`scroll-m-4 ${className}`}>
       <ChatAi chat={chat} isTyping={isTyping} />
-      <div className="md:w-[25rem] flex flex-1 items-center justify-center bg-yellow-500 rounded-xl space-x-3">
+      <div className="md:w-[25rem] flex flex-1 items-center justify-center bg-yellow-500 rounded-xl space-x-3 ">
         <Button className="text-xl" text="emoji" />
         <Input
           type="textarea"

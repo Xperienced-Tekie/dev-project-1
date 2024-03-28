@@ -1,12 +1,14 @@
 "use client";
 
-import ChatAi from "./AiChater";
-import Details from "./Details";
+import Index from "./AiChater/index";
+import Details from "./detail/Details";
 
 const pages = () => (
-  <div className="flex justify-center ">
-    <Details className="hidden w-[28rem] h-[100vh] bg-black md:block" />
-    <ChatAi />
+  <div className="flex ">
+    <Details className="hidden  w-[25rem] h-[100vh] bg-black md:block" />
+    <div className=" md:relative">
+      <Index />
+    </div>
   </div>
 );
 export default pages;
